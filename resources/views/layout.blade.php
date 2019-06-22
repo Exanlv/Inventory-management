@@ -36,6 +36,25 @@
 	</style>
 </head>
 <body>
+	<nav class="navbar navbar-expand-sm bg-info navbar-dark">
+		<ul class="navbar-nav">
+			<li class="nav-item">
+				<a href="#" class="nav-link">Home</a>
+			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+					Categories
+				</a>
+				<div class="dropdown-menu position-absolute">
+					@foreach($categories as $category)
+					<a href="{{ route('category.show', ['category' => strtolower($category->name)]) }}" class="dropdown-item">{{ $category->name }}</a>
+					@endforeach
+					<a href="{{ route('category.add') }}" class="dropdown-item">Add...</a>
+				</div>
+			</li>
+		</ul>
+	</nav>
+	
 	<div class="jumbotron jumbotron-fluid">
 		<div class="container container-fluid">
 			<h1>Inventory Management</h1>
