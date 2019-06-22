@@ -47,9 +47,9 @@
 				</a>
 				<div class="dropdown-menu position-absolute">
 					@foreach($categories as $category)
-					<a href="{{ route('category.show', ['category' => strtolower($category->name)]) }}" class="dropdown-item">{{ $category->name }}</a>
+					<a href="{{ route('categories.show', ['category' => strtolower($category->name)]) }}" class="dropdown-item">{{ $category->name }}</a>
 					@endforeach
-					<a href="{{ route('category.add') }}" class="dropdown-item">Add...</a>
+					<a href="{{ route('categories.create') }}" class="dropdown-item">Add...</a>
 				</div>
 			</li>
 		</ul>

@@ -13,7 +13,4 @@
 
 Route::get('/', 'HomeController@show')->name('home.home');
 
-Route::get('users', 'HomeController@show');
-
-Route::get('category/add', 'CategoryController@add')->name('category.add');
-Route::get('category/show/{category}', 'CategoryController@show')->name('category.show');
+Route::resource('categories', 'CategoryController');

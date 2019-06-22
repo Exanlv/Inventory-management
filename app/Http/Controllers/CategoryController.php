@@ -3,23 +3,62 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Providers\CategoryServiceProvider;
 
 class CategoryController extends Controller
 {
-	public function show($category)
+	public function index()
 	{
-		$categoryInfo = DB::select('select * from categories where lower(name) = lower(:name)', ['name' => $category]);
 
-		if (count($categoryInfo) !== 1) {
+	}
+
+	public function create()
+	{
+		return view('categories.add');
+	}
+
+	public function store(Request $request)
+	{
+		if (!$request->has('category')) {
+			abort(405);
+		}
+
+		$newCategory = $request->input('category');
+
+		if (CategoryServiceProvider::categoryExist($newCategory)) {
+			return view('categories.add', ['categoryName' => $newCategory]);
+		}
+
+		if (CategoryServiceProvider::createCategory($newCategory)) {
+			return redirect()->route('categories.show', ['category' => $newCategory]);
+		}
+	}
+
+	public function show($categoryName)
+	{
+		$categoryInfo = CategoryServiceProvider::getCategoryInfo($categoryName);
+
+		if (!$categoryInfo) {
 			return abort(404);
 		}
 
-		return view('category.show', ['category' => $categoryInfo[0]->name]);
+		return view('categories.show', ['category' => $categoryInfo[0]->name]);
 	}
 
-	public function add()
+	public function edit($categoryName)
 	{
-		return view('category.add');
+
+	}
+
+	public function update($categoryName)
+	{
+
+	}
+	
+	public function destroy($categoryName)
+	{
+		
 	}
 }
