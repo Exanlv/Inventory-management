@@ -6,12 +6,13 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\CategoryServiceProvider;
+use App\Category;
 
 class CategoryController extends Controller
 {
 	public function index()
 	{
-
+		return view('categories.list');
 	}
 
 	public function create()
@@ -25,40 +26,37 @@ class CategoryController extends Controller
 			abort(405);
 		}
 
-		$newCategory = $request->input('category');
+		$categoryName = $request->input('category');
 
-		if (CategoryServiceProvider::categoryExist($newCategory)) {
-			return view('categories.add', ['categoryName' => $newCategory]);
+		if (Category::where('name', $categoryName)->first()) {
+			return view('categories.add', ['categoryName' => $categoryName]);
 		}
 
-		if (CategoryServiceProvider::createCategory($newCategory)) {
-			return redirect()->route('categories.show', ['category' => $newCategory]);
-		}
+		$newCategory = new Category;
+		$newCategory->name = $categoryName;
+		$newCategory->save();
+
+		return redirect()->route('categories.show', ['category' => $newCategory]);
 	}
 
-	public function show($categoryName)
+	public function show(Category $category)
 	{
-		$categoryInfo = CategoryServiceProvider::getCategoryInfo($categoryName);
-
-		if (!$categoryInfo) {
-			return abort(404);
-		}
-
-		return view('categories.show', ['category' => $categoryInfo[0]->name]);
+		return view('categories.show', ['category' => $category->name]);
 	}
 
-	public function edit($categoryName)
+	public function edit(Category $category, Request $request)
 	{
 
 	}
 
-	public function update($categoryName)
-	{
-
-	}
-	
-	public function destroy($categoryName)
+	public function update(Category $category, Request $request)
 	{
 		
+	}
+	
+	public function destroy(Category $category, Request $request)
+	{
+		$category->delete();
+		return redirect()->route('categories.index');
 	}
 }

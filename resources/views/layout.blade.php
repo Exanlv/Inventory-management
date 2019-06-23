@@ -20,6 +20,9 @@
 	<!-- Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
+	<!-- Font awesome -->
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
 	<style>
 	html {
 		font-family: 'Nunito', sans-serif !important;
@@ -45,11 +48,11 @@
 				<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
 					Categories
 				</a>
-				<div class="dropdown-menu position-absolute">
+				<div class="dropdown-menu position-absolute pt-0 rounded-0">
+					<a href="{{ route('categories.index') }}" class="dropdown-item border-bottom">Overview...</a>
 					@foreach($categories as $category)
-					<a href="{{ route('categories.show', ['category' => strtolower($category->name)]) }}" class="dropdown-item">{{ $category->name }}</a>
+					<a href="{{ route('categories.show', ['category' => strtolower($category->id)]) }}" class="dropdown-item">{{ $category->name }}</a>
 					@endforeach
-					<a href="{{ route('categories.create') }}" class="dropdown-item">Add...</a>
 				</div>
 			</li>
 		</ul>
