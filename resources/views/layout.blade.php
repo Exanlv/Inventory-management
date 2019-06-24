@@ -42,7 +42,7 @@
 	<nav class="navbar navbar-expand-sm bg-info navbar-dark">
 		<ul class="navbar-nav">
 			<li class="nav-item">
-				<a href="#" class="nav-link">Home</a>
+				<a href="{{ route('home.home') }}" class="nav-link">Home</a>
 			</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
@@ -65,6 +65,13 @@
 		</div>
 	</div>
 	<div class="container main">
+		<h1 style="margin-bottom: 50px;" class="text-center">@yield('title')</h1>
+		@foreach($errors->all() as $error)
+		<div class="alert alert-danger alert-dismissible" style="width: 50%; margin: auto;">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			{{ $error }}
+		</div>
+		@endforeach
 		@yield('body')
 	</div>
 </body>

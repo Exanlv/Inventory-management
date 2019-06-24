@@ -14,3 +14,6 @@
 Route::get('/', 'HomeController@show')->name('home.home');
 
 Route::resource('categories', 'CategoryController');
+Route::resource('products', 'ProductController',[
+	'except' => ['index']
+]);

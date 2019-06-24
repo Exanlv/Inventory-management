@@ -22,36 +22,35 @@ class CategoryController extends Controller
 
 	public function store(Request $request)
 	{
-		if (!$request->has('category')) {
-			abort(405);
-		}
+		$request->validate([
+			'category' => ['required', 'max:255', 'unique:category,name']
+		]);
 
-		$categoryName = $request->input('category');
-
-		if (Category::where('name', $categoryName)->first()) {
-			return view('categories.add', ['categoryName' => $categoryName]);
-		}
-
-		$newCategory = new Category;
-		$newCategory->name = $categoryName;
-		$newCategory->save();
+		$newCategory = Category::create(['name' => $request->input('category')]);
 
 		return redirect()->route('categories.show', ['category' => $newCategory]);
 	}
 
 	public function show(Category $category)
 	{
-		return view('categories.show', ['category' => $category->name]);
+		return view('categories.show', ['category' => $category]);
 	}
 
-	public function edit(Category $category, Request $request)
+	public function edit(Category $category)
 	{
-
+		return view('categories.edit', ['category' => $category]);
 	}
 
-	public function update(Category $category, Request $request)
+	public function update(Request $request, Category $category)
 	{
-		
+		$request->validate([
+			'category' => ['required','max:255']
+		]);
+
+		$category->name = $request->input('category');
+		$category->save();
+
+		return redirect()->route('categories.show', ['category' => $category]);
 	}
 	
 	public function destroy(Category $category, Request $request)
