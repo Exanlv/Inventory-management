@@ -28,13 +28,12 @@
 		font-family: 'Nunito', sans-serif !important;
 	}
 
-	.main h1 {
-		color: #212529;
+	html {
+		overflow-y: scroll !important;
 	}
 
-	.main {
-		font-size: 20px;
-		color: #909090;
+	body.modal-open {
+		overflow: visible !important;
 	}
 	</style>
 </head>

@@ -26,7 +26,7 @@
 
                 </td>
                 <td>
-                    <input type="number" class="form-control" id="price" name="price" value="{{  old('price') }}">
+                    <input type="number" class="form-control" id="price" name="price" step="0.01" value="{{  old('price') }}">
                 </td>
             </tr>
         </table>
@@ -48,9 +48,9 @@
             </tr>
             <tr>
                 <td>
-                    <select class="form-control" id="category" name="category_id" value="{{ old('category_id')  }}">
-                        @foreach($categories as $category)
-                            <option value="{{ $category->id  }}">{{ $category->name  }}</option>
+                    <select class="form-control" id="category" name="category_id">
+                        @foreach($categories as $i => $category)
+                            <option {{ $i === $category_id ? 'selected' : ''  }} value="{{ $category->id  }}">{{ $category->name  }}</option>
                         @endforeach
                     </select>
                 </td>

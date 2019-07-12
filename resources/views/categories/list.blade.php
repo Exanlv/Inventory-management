@@ -32,9 +32,7 @@
             </tr>
             @endforeach
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td colspan="3"></td>
                 <td class="text-center"><a href="{{ route('categories.create') }}"><i class="fa fa-plus text-success" aria-hidden="true"></i></a></td>
             </tr>
         </table>

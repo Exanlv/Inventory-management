@@ -4,13 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\Rules\Price;
 
 class ProductController extends Controller
 {
 	public function create()
 	{
-		return view('products.add');
+	    $category_id = old('category_id') ? old('category_id') - 1 : 0;
+		return view('products.add', ['category_id' => $category_id]);
 	}
+
+    public function createInCategory($category_id)
+    {
+        $category_id = (old('category_id') ? old('category_id') : $category_id) - 1;
+        return view('products.add', ['category_id' => $category_id]);
+    }
 
 	public function store(Request $request)
 	{
@@ -18,12 +26,12 @@ class ProductController extends Controller
 		    'name' => ['required', 'max:255'],
             'category_id' => ['required', 'exists:category,id'],
             'description' => [],
-            'price' => []
+            'price' => [new Price]
         ]);
 
 		$product = Product::create($product);
 
-		return $product;
+		return redirect(route('categories.show', ['category' => $product->category]) . '#product-' . $product->id);
 	}
 
 	public function show(Product $product)
@@ -42,7 +50,7 @@ class ProductController extends Controller
             'name' => ['required', 'max:255'],
             'category_id' => ['required', 'exists:category,id'],
             'description' => [],
-            'price' => []
+            'price' => [new Price]
         ]);
 
         $product->name = $validatedData['name'];
@@ -58,5 +66,6 @@ class ProductController extends Controller
 	public function destroy(Product $product)
 	{
         $product->delete();
+        return redirect()->route('categories.show', ['category' => $product->category]);
 	}
 }

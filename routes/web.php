@@ -14,6 +14,12 @@
 Route::get('/', 'HomeController@show')->name('home.home');
 
 Route::resource('categories', 'CategoryController');
+Route::get('categories/{category}/create', 'ProductController@createInCategory')->name('products.create.inCategory');
+
 Route::resource('products', 'ProductController',[
 	'except' => ['index']
+]);
+
+Route::resource('product_images', 'ProductImageController', [
+    'except' => ['index', 'show', 'update', 'edit']
 ]);
