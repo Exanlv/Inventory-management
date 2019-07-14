@@ -59,7 +59,7 @@
 
                     </td>
                     <td>
-                        <input type="submit" class="btn btn-primary float-right" style="width: 100%;" value="Add product">
+                        <input type="submit" class="btn btn-primary float-right" style="width: 100%;" value="Edit product">
                     </td>
                 </tr>
             </table>
