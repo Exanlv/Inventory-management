@@ -78,7 +78,7 @@ class ProductController extends Controller
 
         $product->save();
 
-        return $product;
+        return redirect(route('categories.show', ['category' => $product->category]));
 	}
 
 	public function destroy(Product $product)
