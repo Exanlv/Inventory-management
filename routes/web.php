@@ -19,7 +19,3 @@ Route::get('categories/{category}/create', 'ProductController@createInCategory')
 Route::resource('products', 'ProductController',[
 	'except' => ['index']
 ]);
-
-Route::resource('product_images', 'ProductImageController', [
-    'except' => ['index', 'show', 'update', 'edit']
-]);

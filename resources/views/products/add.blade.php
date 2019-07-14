@@ -3,7 +3,7 @@
 @section('title') Add product @endsection
 
 @section('body')
-<form method="POST" action="{{ route('products.store')  }}">
+<form method="POST" action="{{ route('products.store')  }}" enctype="multipart/form-data">
     @csrf
     <div class="form-group">
         <table style="width: 100%; margin-bottom: 1rem;">
@@ -33,6 +33,10 @@
 
         <label for="description">Description:</label>
         <textarea class="form-control" id="description" name="description" style="height: 8rem; margin-bottom: 1rem;">{{ old('description')  }}</textarea>
+
+        <div id="image_fields">
+
+        </div>
 
         <table style="width: 100%; margin-bottom: 1rem;">
             <tr>
@@ -65,4 +69,17 @@
 
     </div>
 </form>
+<script>
+function imageField() {
+    var inputField = $('<input class="form-control image_input_field" style="height: initial; margin-bottom: 5px;" type="file" name="images[]" accept=".png,.jpeg,.jpg">');
+    $(inputField).change(() => {
+        if ($(this).value === $('.image_input_field:last-of-type').value && $('.image_input_field').length < 10) {
+            $('#image_fields').append(imageField());
+        }
+    })
+    return inputField;
+}
+
+$('#image_fields').append(imageField());
+</script>
 @endsection

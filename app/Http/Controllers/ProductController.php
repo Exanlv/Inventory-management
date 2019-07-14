@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Request as OtherRequest;
 use App\Product;
+use App\ProductImage;
 use App\Rules\Price;
 
 class ProductController extends Controller
@@ -30,6 +32,22 @@ class ProductController extends Controller
         ]);
 
 		$product = Product::create($product);
+
+        if ($request->has('images')) {
+            foreach ($request->file('images') as $image) {
+                if (isset($image)) {
+                    ProductImage::create(['product_id' => $product->id, 'path' => $image->store('public/product_images')]);
+                }
+            }
+        }
+
+
+
+
+        // if ($request->has('images0')) {
+            // $request->images0->store('product_images');
+        // }
+
 
 		return redirect(route('categories.show', ['category' => $product->category]) . '#product-' . $product->id);
 	}
