@@ -2,12 +2,12 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
-class AlertServiceProvider extends ServiceProvider
+class ScriptsServiceProvider extends ServiceProvider
 {
-	private $alerts = [];
-
+    private $scripts = [];
     /**
      * Register services.
      *
@@ -25,11 +25,14 @@ class AlertServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::share('alerts', $this->alerts);
-	}
-	
-	public function addAlert($type, $text)
-	{
-		$this->alerts[] = ['type' => $type, 'text' => $text];
-	}
+        View::share('scripts', $this->scripts);
+    }
+
+    /**
+     * Add a script
+     */
+    public function addScript($script)
+    {
+        $this->scripts[] = $script;
+    }
 }

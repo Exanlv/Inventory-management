@@ -23,6 +23,9 @@
 	<!-- Font awesome -->
 	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
+	<!-- jQuery plugins -->
+	<script src="{{ asset('js/plugins/jquery.actual.min.js') }}"></script>
+
 	<style>
 	html {
 		font-family: 'Nunito', sans-serif !important;
@@ -50,7 +53,7 @@
 				<div class="dropdown-menu position-absolute pt-0 rounded-0">
 					<a href="{{ route('categories.index') }}" class="dropdown-item border-bottom">Overview...</a>
 					@foreach($categories as $category)
-					<a href="{{ route('categories.show', ['category' => strtolower($category->id)]) }}" class="dropdown-item">{{ $category->name }}</a>
+					<a href="{{ route('categories.show', ['category' => $category->id]) }}" class="dropdown-item">{{ $category->name }}</a>
 					@endforeach
 				</div>
 			</li>
@@ -75,3 +78,20 @@
 	</div>
 </body>
 </html>
+<script>
+(() => {
+	var scripts = [@stack('componentScripts')];
+
+	var unique_scripts = [];
+
+	for (var i = 0; i < scripts.length; i++) {
+		if (!unique_scripts.includes(scripts[i])) {
+			unique_scripts.push(scripts[i]);
+		}
+	}
+
+	for (var i = 0; i < unique_scripts.length; i++) {
+		$.getScript(`{{ asset('') }}${unique_scripts[i]}`);
+	}
+})();
+</script>

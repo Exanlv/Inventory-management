@@ -11,6 +11,11 @@
 |
 */
 
+// Route::get('/', function() {
+	// app('scripts')->addScript('kaas');\
+	// dd(app('scripts'));
+// });
+
 Route::get('/', 'HomeController@show')->name('home.home');
 
 Route::resource('categories', 'CategoryController');
@@ -19,3 +24,5 @@ Route::get('categories/{category}/create', 'ProductController@createInCategory')
 Route::resource('products', 'ProductController',[
 	'except' => ['index']
 ]);
+
+Route::get('product_images/{image}/delete', 'ProductController@destroyImage')->name('products.destroyImage');

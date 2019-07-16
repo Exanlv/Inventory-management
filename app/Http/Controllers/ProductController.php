@@ -7,6 +7,7 @@ use Request as OtherRequest;
 use App\Product;
 use App\ProductImage;
 use App\Rules\Price;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -85,5 +86,12 @@ class ProductController extends Controller
 	{
         $product->delete();
         return redirect()->route('categories.show', ['category' => $product->category]);
-	}
+    }
+    
+    public function destroyImage(ProductImage $image)
+    {
+        Storage::delete($image->path);
+        $image->delete();
+        return 'true';
+    }
 }
