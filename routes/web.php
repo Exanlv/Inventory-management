@@ -26,3 +26,5 @@ Route::resource('products', 'ProductController',[
 ]);
 
 Route::get('product_images/{image}/delete', 'ProductController@destroyImage')->name('products.destroyImage');
+
+Route::get('export', 'DataController@export')->name('data.export');

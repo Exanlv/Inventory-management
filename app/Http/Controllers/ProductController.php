@@ -77,6 +77,14 @@ class ProductController extends Controller
         $product->description = $validatedData['description'];
         $product->price = $validatedData['price'];
 
+        if ($request->has('images')) {
+            foreach ($request->file('images') as $image) {
+                if (isset($image)) {
+                    ProductImage::create(['product_id' => $product->id, 'path' => $image->store('public/product_images')]);
+                }
+            }
+        }
+
         $product->save();
 
         return redirect(route('categories.show', ['category' => $product->category]));
