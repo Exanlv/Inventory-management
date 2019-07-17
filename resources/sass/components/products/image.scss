@@ -1,0 +1,17 @@
+.component-product-image {
+    position: relative;
+    margin-bottom: 0.5rem;
+
+    i {
+        position: absolute;
+        font-size: 1.5rem;
+        top: 0.375rem;
+        right: 1.5rem; 
+        opacity: 0.5;
+    }
+
+    img {
+        max-width: 100%;
+    }
+}
+

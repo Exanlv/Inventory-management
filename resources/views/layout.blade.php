@@ -26,6 +26,7 @@
 	<!-- jQuery plugins -->
 	<script src="{{ asset('js/plugins/jquery.actual.min.js') }}"></script>
 
+	<link rel="stylesheet" href="{{ asset('css/main.css') }}">
 	<style>
 	html {
 		font-family: 'Nunito', sans-serif !important;

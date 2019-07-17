@@ -36,28 +36,10 @@
             <textarea class="form-control" id="description" name="description" style="height: 8rem; margin-bottom: 1rem;">{{ $product->description  }}</textarea>
 
             @component('components.shared.slideout', ['title' => 'Images'])
-                <div class="row">
-                    @foreach($product->images->all() as $image)
-                        <div class="col-lg-3 col-md-6 image-container" style="position: relative; margin-bottom: 0.5rem;">
-                            <i class="fa fa-times text-danger remove-image" aria-hidden="true" style="position: absolute; font-size: 1.5rem; top: 0.375rem; right: 1.5rem; opacity: 0.5"></i>
-                            <img src="{{ Storage::url($image->path) }}" style="max-width: 100%" data-id="{{ $image->id }}">
-                        </div>
-                    @endforeach
-                </div>
-                <script>
-                    $('.remove-image').click(function() {
-
-                        $(this).click(() => {});
-                        var parent = $(this).parent();
-                        var url = '{{ route('products.destroyImage', ['image' => ':id:']) }}'.replace(':id:', $($(parent).children()[1]).data('id'));
-                        $.get(url, (data) => {
-                            if (data === 'true') {
-                                $(parent).remove();
-                            }
-                        });
-                    });
-                </script>
+                @component('components.products.images', ['images' => $product->images->all()])
+            	@endcomponent
             @endcomponent
+
             <table style="width: 100%; margin: 1rem 0;">
                 <tr>
                     <td style="width: calc(50% - 0.5rem);">

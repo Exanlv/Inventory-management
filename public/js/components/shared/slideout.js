@@ -1,4 +1,4 @@
-$('.slideout-button').click(function() {
+$('.component-shared-slideout .button').click(function() {
     var slideout = $(this).parent();
     var vee = $(this).children()[0];
     var content = $(slideout).children()[1];
