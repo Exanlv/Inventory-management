@@ -23,7 +23,7 @@
 
             <div class="row">
                 <div class="col-12">
-                    <label for="description">Description:</label>
+                    <label for="description">Description</label>
                     <textarea class="form-control" id="description" name="description" style="height: 8rem; margin-bottom: 1rem;">{{ $product->description  }}</textarea>
                 </div>
             </div>

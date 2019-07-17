@@ -19,7 +19,7 @@ class ProductController extends Controller
 
     public function createInCategory($category_id)
     {
-        $category_id = (old('category_id') ? old('category_id') : $category_id) - 1;
+        $category_id = (old('category_id') ? old('category_id') : $category_id);
         return view('products.add', ['category_id' => $category_id]);
     }
 

@@ -21,7 +21,7 @@
 
         <div class="row">
             <div class="col-12">
-                <label for="description">Description:</label>
+                <label for="description">Description</label>
                 <textarea class="form-control" id="description" name="description" style="height: 8rem; margin-bottom: 1rem;">{{ old('description')  }}</textarea>
             </div>
         </div>
@@ -38,7 +38,7 @@
                 <label for="category">Category</label>
                 <select class="form-control" id="category" name="category_id">
                     @foreach($categories as $category)
-                        <option {{ $category->id === $category_id ? 'selected' : ''  }} value="{{ $category->id  }}">{{ $category->name  }}</option>
+                        <option value="{{ $category->id  }}" {{ $category->id == $category_id ? 'selected=selected' : ''  }}>{{ $category->name  }}</option>
                     @endforeach
                 </select>
             </div>
