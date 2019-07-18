@@ -38,6 +38,7 @@ $('.component-shared-slideout .button').click(function() {
             var contentHeight = $(content).actual('outerHeight');
             $(content).css({'display': 'block', 'height': '0'});
             $(content).animate({'height': contentHeight + 'px'}, contentHeight * 5, () => {
+                $(content).css('height', 'auto');
                 $(slideout).data('open', true);
             });
 

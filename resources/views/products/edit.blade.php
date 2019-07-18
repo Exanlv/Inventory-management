@@ -42,7 +42,7 @@
                     <label for="category">Category</label>
                     <select class="form-control" id="category" name="category_id" value="{{ $product->category_id  }}">
                         @foreach($categories as $category)
-                            <option value="{{ $category->id  }}">{{ $category->name  }}</option>
+                            <option value="{{ $category->id  }}" {{ $category->id === $product->category_id ? 'selected' : '' }}>{{ $category->name  }}</option>
                         @endforeach
                     </select>
                 </div>
